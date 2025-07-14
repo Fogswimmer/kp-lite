@@ -1,0 +1,6 @@
+[submodule "symfony"]
+    path = symfony
+    url = git@github.com:Fogswimmer/kp-api.git
+[submodule "nuxt"]
+    path = nuxt
+    url = git@github.com:Fogswimmer/kp-api.git
