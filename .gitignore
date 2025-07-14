@@ -1,0 +1,42 @@
+# Node / Nuxt
+nuxt/node_modules/
+nuxt/.output/
+nuxt/.nuxt/
+nuxt/.env
+nuxt/.vercel/
+
+# Symfony
+symfony/var/
+symfony/vendor/
+symfony/.env.local
+symfony/.env.*
+symfony/public/uploads/
+
+# Docker volumes (путь зависит от твоей структуры)
+caddy/data/
+caddy_config/
+postgres_data/
+docker/postgres_data/
+docker/redis_data/
+docker/caddy_data/
+
+# Docker artifacts
+*.pid
+*.log
+*.sock
+
+# Editor configs
+.vscode/
+.idea/
+*.sw?
+*~
+
+# System files
+.DS_Store
+Thumbs.db
+
+# dotenv
+.env
+.env.*
+!.env.example
+
