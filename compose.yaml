@@ -37,7 +37,8 @@ services:
     container_name: nuxt
     ports:
       - "3000:3000"
-    command: ["node", "/app/.output/server/index.mjs"]
+    volumes:
+      - ./nuxt/.output:/app/.output
     networks:
       - app-network
   db:
