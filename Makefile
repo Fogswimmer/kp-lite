@@ -1,6 +1,6 @@
 PROJECT_NAME := kp-lite
 COMPOSE := docker compose
-COMPOSE_FILE := compose.yml
+COMPOSE_FILE := compose.yaml
 
 up:
 	$(COMPOSE) -f $(COMPOSE_FILE) up -d
