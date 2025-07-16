@@ -37,7 +37,7 @@
 
 ___
 
-##Пример .env
+## Пример .env
 
 DB_NAME=symfony
 DB_USER=symfony
