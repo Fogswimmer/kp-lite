@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 set -e
 
 IFS=$'\n\t'
@@ -16,9 +16,10 @@ set +a
 
 : "${DB_NAME:? DB_NAME is not set}"
 : "${DB_USER:? DB_USER is not set}"
+: "${DB_PASSWORD:? DB_PASSWORD is not set}"
 
 DB_CONTAINER="db"
-DUMP_PATH="~/kp-lite/dump.sql"
+DUMP_PATH="$HOME/kp-lite/dump.sql"
 
 echo "Generating dump file..."
 docker exec -i "$DB_CONTAINER" /bin/bash -c "PGPASSWORD=$DB_PASSWORD pg_dump --username=$DB_USER $DB_NAME" > "$DUMP_PATH"
