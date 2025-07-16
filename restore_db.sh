@@ -19,7 +19,7 @@ set +a
 : "${DB_USER:? DB_USER is not set}"
 
 DB_CONTAINER="db"
-DUMP_PATH="./symfony/kp_lite_dump.sql"
+DUMP_PATH="./symfony/pg_dump.sql"
 CONTAINER_DUMP_PATH="/dump.sql"
 
 echo "Copying dump file to the db container..."
