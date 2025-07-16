@@ -12,14 +12,13 @@ if [[ ! -f "$ENV_FILE" ]]; then
 fi
 
 set -a
-source <(grep -E '^(DB_NAME|DB_USER|DB_PASSWORD)=' "$ENV_FILE" | sed 's/^export //')
+source <(grep -E '^(DB_NAME|DB_USER|DB_PASSWORD|DUMP_PATH)=' "$ENV_FILE" | sed 's/^export //')
 set +a
 
 : "${DB_NAME:? DB_NAME is not set}"
 : "${DB_USER:? DB_USER is not set}"
 
 DB_CONTAINER="db"
-DUMP_PATH="./symfony/pg_dump.sql"
 CONTAINER_DUMP_PATH="/dump.sql"
 
 echo "Copying dump file to the db container..."
