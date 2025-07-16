@@ -51,4 +51,6 @@ restore:
 rebuild:
 	$(COMPOSE) -f $(COMPOSE_FILE) down --volumes --remove-orphans
 	$(COMPOSE) -f $(COMPOSE_FILE) up -d --build
-
+submodules:
+	git submodule init
+	git submodule update --remote --merge
