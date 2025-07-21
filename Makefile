@@ -54,3 +54,5 @@ rebuild:
 submodules:
 	git submodule init
 	git submodule update --remote --merge
+copy-uploads:
+	cp -r uploads/* symfony/public/uploads/

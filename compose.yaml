@@ -83,7 +83,20 @@ services:
       RABBITMQ_DEFAULT_PASS: guest
     networks:
       - app-network
-
+  worker:
+    container_name: worker
+    build:
+       context: ./symfony
+    command: php bin/console messenger:consume async -vv
+    depends_on:
+      - symfony
+      - rabbitmq
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 volumes:
   postgres_data:
   caddy_data:

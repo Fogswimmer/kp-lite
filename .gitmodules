@@ -1,6 +1,8 @@
 [submodule "symfony"]
 	path = symfony
 	url = git@github.com:Fogswimmer/kp-api.git
+	branch = main
 [submodule "nuxt"]
 	path = nuxt
 	url = git@github.com:Fogswimmer/kp-nuxt.git
+	branch = main
