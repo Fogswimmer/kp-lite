@@ -6,3 +6,6 @@
 	path = nuxt
 	url = git@github.com:Fogswimmer/kp-nuxt.git
 	branch = main
+[submodule "services/image-compressor"]
+	path = services/image-compressor
+	url = https://github.com/Fogswimmer/img_compressor_go.git

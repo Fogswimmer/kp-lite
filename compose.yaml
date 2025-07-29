@@ -34,7 +34,7 @@ services:
     networks:
       - app-network
   nuxt:
-    build: ./nuxt 
+    build: ./nuxt
     working_dir: /app
     container_name: nuxt
     ports:
@@ -60,6 +60,20 @@ services:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - app-network
+  image-compressor:
+    build: ./services/image-compressor
+    container_name: img-compressor
+    environment:
+      PORT: ${GIN_PORT}
+      HOST: ${GIN_HOST}
+      MAX_FILE_SIZE: ${IMG_MAX_FILE_SIZE}
+      DEFAULT_QUALITY: ${IMG_DEFAULT_QUALITY}
+      ALLOW_ORIGIN: ${GIN_ALLOW_ORIGIN}
+      GIN_MODE: ${GIN_MODE}
+    depends_on:
+      - symfony
+    networks:
+      - app-network
   redis:
     container_name: redis
     image: redis
@@ -79,14 +93,14 @@ services:
       retries: 3
       start_period: 40s
     environment:
-      RABBITMQ_DEFAULT_USER: guest
-      RABBITMQ_DEFAULT_PASS: guest
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
     networks:
       - app-network
   worker:
     container_name: worker
     build:
-       context: ./symfony
+      context: ./symfony
     command: php bin/console messenger:consume async -vv
     depends_on:
       - symfony
@@ -97,6 +111,8 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
+    networks:
+      - app-network
 volumes:
   postgres_data:
   caddy_data:
@@ -104,4 +120,3 @@ volumes:
 networks:
   app-network:
     driver: bridge
-
