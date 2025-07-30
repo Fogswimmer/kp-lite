@@ -63,6 +63,8 @@ services:
   image-compressor:
     build: ./services/image-compressor
     container_name: img-compressor
+    ports:
+        - "7070:7070"
     environment:
       PORT: ${GIN_PORT}
       HOST: ${GIN_HOST}
