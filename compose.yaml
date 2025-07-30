@@ -10,7 +10,12 @@ services:
       db:
         condition: service_healthy
     restart: unless-stopped
-
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
     networks:
       - app-network
   caddy:
@@ -103,11 +108,19 @@ services:
     container_name: worker
     build:
       context: ./symfony
-    command: php bin/console messenger:consume async -vv
+    command: ["/worker-entrypoint.sh"]
     depends_on:
-      - symfony
-      - rabbitmq
+      symfony:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_started
     restart: unless-stopped
+    environment:
+      - SKIP_DB_CHECK=true
+      - SKIP_CACHE_WARMUP=true
+      - CONTAINER_TYPE=worker
+    volumes:
+      - ./symfony/worker-entrypoint.sh:/worker-entrypoint.sh:ro
     logging:
       driver: "json-file"
       options:
