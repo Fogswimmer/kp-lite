@@ -10,12 +10,6 @@ services:
       db:
         condition: service_healthy
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
     networks:
       - app-network
   caddy:
@@ -69,7 +63,7 @@ services:
     build: ./services/image-compressor
     container_name: img-compressor
     ports:
-        - "7070:7070"
+      - "7070:7070"
     environment:
       PORT: ${GIN_PORT}
       HOST: ${GIN_HOST}
@@ -111,7 +105,7 @@ services:
     command: ["/worker-entrypoint.sh"]
     depends_on:
       symfony:
-        condition: service_healthy
+        condition: service_started
       rabbitmq:
         condition: service_started
     restart: unless-stopped
