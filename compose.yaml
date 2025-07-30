@@ -102,7 +102,6 @@ services:
     container_name: worker
     build:
       context: ./symfony
-    command: ["/worker-entrypoint.sh"]
     depends_on:
       symfony:
         condition: service_started
@@ -113,8 +112,9 @@ services:
       - SKIP_DB_CHECK=true
       - SKIP_CACHE_WARMUP=true
       - CONTAINER_TYPE=worker
+      - APP_ENV=prod
     volumes:
-      - ./symfony/worker-entrypoint.sh:/worker-entrypoint.sh:ro
+      - ./symfony:/var/www/html:cached
     logging:
       driver: "json-file"
       options:
