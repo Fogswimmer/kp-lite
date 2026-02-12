@@ -1,4 +1,4 @@
-nebelschwimmer.site {
+kp-lite.site {
 	encode gzip zstd
 	
 	@api {
