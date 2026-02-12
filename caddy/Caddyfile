@@ -1,4 +1,4 @@
-kp-lite.site {
+{$SITE_DOMAIN} {
 	encode gzip zstd
 	
 	@api {

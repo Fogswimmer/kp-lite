@@ -19,6 +19,8 @@ services:
     ports:
       - 80:80
       - "${SITE_HOST}:443:443"
+    environment:
+      SITE_DOMAIN: ${SITE_DOMAIN:-localhost}
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
       - ./caddy/data:/data
