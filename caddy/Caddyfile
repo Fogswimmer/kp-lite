@@ -22,13 +22,9 @@
 		reverse_proxy nuxt:3000
 	}
 
-  	handle_path /xhttp-path* {
-        reverse_proxy h2c://127.0.0.1:10000 {
-            transport http {
-                versions h2c 2
-            }
-        }
-    }
+	handle /ws* {
+	    reverse_proxy 127.0.0.1:10000
+	}
 	
 	header {
 		X-Frame-Options "DENY"
