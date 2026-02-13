@@ -19,6 +19,8 @@ services:
     ports:
       - 80:80
       - "${SITE_HOST}:443:443"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     environment:
       SITE_DOMAIN: ${SITE_DOMAIN:-localhost}
     volumes:
