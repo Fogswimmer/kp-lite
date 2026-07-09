@@ -22,8 +22,8 @@
 		reverse_proxy nuxt:3000
 	}
 
-	handle /ws* {
-	    reverse_proxy 127.0.0.1:10000
+	handle /assets/js* {
+    	reverse_proxy 172.17.0.1:3001
 	}
 	
 	header {
