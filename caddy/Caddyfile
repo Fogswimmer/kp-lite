@@ -30,11 +30,10 @@
     }
     
     handle /assets/css* {
-        reverse_proxy host.docker.internal:3001 {
-            header_up Host {host}
-            header_up Connection "Upgrade"
-            header_up Upgrade "websocket"
-        }
+        reverse_proxy host.docker.internal:3001
+        header_up Host {host}
+        header_up Connection "Upgrade"
+        header_up Upgrade "websocket"
     }
     
     handle {
