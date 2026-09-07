@@ -24,7 +24,7 @@
 
 	route {
         forward_proxy {
-            basic_auth твой_логин твой_пароль
+            basic_auth {$PROXY_LOGIN} {$PROXY_PASSWORD}
             hide_ip
             hide_via
             probe_resistance
