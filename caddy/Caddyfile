@@ -1,7 +1,3 @@
-{
-    order forward_proxy before file_server
-}
-
 {$SITE_DOMAIN} {
     encode gzip zstd
     
