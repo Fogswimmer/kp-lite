@@ -13,7 +13,7 @@ services:
     networks:
       - app-network
   caddy:
-      image: pocat/naiveproxy
+      image: caddy:latest
       restart: unless-stopped
       container_name: caddy
       ports:
@@ -25,9 +25,6 @@ services:
         - SITE_DOMAIN=${SITE_DOMAIN:-localhost}
         - PROXY_LOGIN=${PROXY_LOGIN}
         - PROXY_PASSWORD=${PROXY_PASSWORD}
-        - CADDY_INGRESS_NAMESPACE=
-        - NAIVEPROXY_USER=${PROXY_LOGIN}
-        - NAIVEPROXY_PASS=${PROXY_PASSWORD}
       volumes:
         - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
         - ./caddy/data:/data
