@@ -13,7 +13,7 @@ services:
     networks:
       - app-network
   caddy:
-    image: caddy:latest
+    image: ghcr.io/michaol/caddy-naive:latest
     restart: unless-stopped
     container_name: caddy
     ports:
