@@ -18,9 +18,15 @@
 		reverse_proxy symfony:80
 	}
 
-	handle /assets/js* {
-    	reverse_proxy host.docker.internal:3001
+	handle /assets/css* {
+        reverse_proxy host.docker.internal:3001
+		header_up Host {host}
+		header_up X-Real-IP {remote_host}
+		header_up X-Forwarded-For {remote_host}
+		header_up Connection "Upgrade"
+		header_up Upgrade "websocket"
 	}
+
 	
 	handle {
 		reverse_proxy nuxt:3000
