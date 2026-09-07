@@ -12,35 +12,35 @@ services:
     restart: unless-stopped
     networks:
       - app-network
-caddy:
-    image: pocat/naiveproxy
-    restart: unless-stopped
-    container_name: caddy
-    ports:
-      - 80:80
-      - "443:443"
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    environment:
-      - SITE_DOMAIN=${SITE_DOMAIN:-localhost}
-      - PROXY_LOGIN=${PROXY_LOGIN}
-      - PROXY_PASSWORD=${PROXY_PASSWORD}
-      - CADDY_INGRESS_NAMESPACE=
-      - NAIVEPROXY_USER=${PROXY_LOGIN}
-      - NAIVEPROXY_PASS=${PROXY_PASSWORD}
-    volumes:
-      - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
-      - ./caddy/data:/data
-      - ./caddy_config:/config
-      - ./caddy/fallback:/var/www
-      - ./symfony/public:/var/www/html/public
-    depends_on:
-      symfony:
-        condition: service_started
-      nuxt:
-        condition: service_started
-    networks:
-      - app-network
+  caddy:
+      image: pocat/naiveproxy
+      restart: unless-stopped
+      container_name: caddy
+      ports:
+        - 80:80
+        - "443:443"
+      extra_hosts:
+        - "host.docker.internal:host-gateway"
+      environment:
+        - SITE_DOMAIN=${SITE_DOMAIN:-localhost}
+        - PROXY_LOGIN=${PROXY_LOGIN}
+        - PROXY_PASSWORD=${PROXY_PASSWORD}
+        - CADDY_INGRESS_NAMESPACE=
+        - NAIVEPROXY_USER=${PROXY_LOGIN}
+        - NAIVEPROXY_PASS=${PROXY_PASSWORD}
+      volumes:
+        - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+        - ./caddy/data:/data
+        - ./caddy_config:/config
+        - ./caddy/fallback:/var/www
+        - ./symfony/public:/var/www/html/public
+      depends_on:
+        symfony:
+          condition: service_started
+        nuxt:
+          condition: service_started
+      networks:
+        - app-network
   nuxt:
     build: ./nuxt
     working_dir: /app
