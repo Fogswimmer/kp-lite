@@ -23,6 +23,8 @@ services:
       - "host.docker.internal:host-gateway"
     environment:
       SITE_DOMAIN: ${SITE_DOMAIN:-localhost}
+      PROXY_LOGIN: ${PROXY_LOGIN}
+      PROXY_PASSWORD: ${PROXY_PASSWORD}
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
       - ./caddy/data:/data
