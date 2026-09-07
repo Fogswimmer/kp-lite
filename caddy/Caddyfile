@@ -3,26 +3,26 @@
 }
 
 {$SITE_DOMAIN} {
-	encode gzip zstd
-	
-	@api {
-		path /api/*
-	}
-	
-	@uploads {
-		path /uploads/*
-	}
-	
-	handle @uploads {
-		root * /var/www/html/public
-		file_server
-	}
-	
-	handle @api {
-		reverse_proxy symfony:80
-	}
+    encode gzip zstd
+    
+    @api {
+        path /api/*
+    }
+    
+    @uploads {
+        path /uploads/*
+    }
+    
+    handle @uploads {
+        root * /var/www/html/public
+        file_server
+    }
+    
+    handle @api {
+        reverse_proxy symfony:80
+    }
 
-	route {
+    route {
         forward_proxy {
             basic_auth {$PROXY_LOGIN} {$PROXY_PASSWORD}
             hide_ip
@@ -38,20 +38,19 @@
             }
         }
 
-	handle {
-		reverse_proxy nuxt:3000
-	}
-	
-	header {
-		X-Frame-Options "DENY"
-		X-Content-Type-Options "nosniff"
-		Referrer-Policy "strict-origin-when-cross-origin"
-	}
-	
-	log {
-		output file /var/log/caddy/access.log
-		format console
-	}
-
+        handle {
+            reverse_proxy nuxt:3000
+        }
+    }
+    
+    header {
+        X-Frame-Options "DENY"
+        X-Content-Type-Options "nosniff"
+        Referrer-Policy "strict-origin-when-cross-origin"
+    }
+    
+    log {
+        output file /var/log/caddy/access.log
+        format console
+    }
 }
-
